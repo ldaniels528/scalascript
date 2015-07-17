@@ -253,7 +253,7 @@ import com.ldaniels528.scalascript.core.TimerConversions._
 $timeout(() => doSomething(), 5.minutes)
 ```
 
-### JSON data as case-classes
+### JSON data as Scala objects
 
 ScalaScript allows you to utilize dynamic JavaScript objects or type-safe Scala objects using traits. 
 Consider the following example:
