@@ -1,85 +1,90 @@
 package com.github.ldaniels528.scalascript.extensions
 
+import com.github.ldaniels528.scalascript.Scope
+
 import scala.scalajs.js
 
 /**
- * Route Service
+ * \$route is used for deep-linking URLs to controllers and views (HTML partials).
+ * It watches \$location.url() and tries to map the path to an existing route definition.
+ * @see [[https://docs.angularjs.org/api/ngRoute/service/\$route]]
  */
 trait Route extends js.Object {
 
   /**
-   * Controller function that should be associated with the newly created scope or the name of a registered controller.
+   * Reference to the current route definition.
    */
-  var controller: js.Object = js.native
+  var current: RouteCurrent = js.native
 
   /**
-   * A controller alias name. If present the controller will be published to the scope under this name.
+   * Object with all route configuration Objects as its properties.
    */
-  var controllerAs: String = js.native
+  var routes: js.Dictionary[String] = js.native
 
   /**
-   * Value to update $$location path with and trigger route redirection.
+   * Causes $route service to reload the current route even if $location hasn't changed.
+   * As a result of that, ngView creates new scope and reinstantiates the controller.
    */
-  var redirectTo: js.Object = js.native
+  def reload(): Unit = js.native
 
   /**
-   * An optional Map of dependencies which should be injected into the controller.
+   * Causes $route service to update the current URL, replacing current route parameters with those specified in
+   * newParams. Provided property names that match the route's path segment definitions will be interpolated into the
+   * location's path, while remaining properties will be treated as query params.
+   * @param newParams mapping of URL parameter names to values
    */
-  var resolve: js.Dictionary[js.Object] = js.native
-
-  /**
-   * HTML template as a string or function.
-   * If it is a function, it will be called with an array containing the parameters from the current route.
-   */
-  var template: js.Object = js.native
-
-  /**
-   * Path, or function that returns a path to an html template that should be used by ngView.
-   * If it is a function, it will be called with an array containing the parameters from the current route.
-   */
-  var templateUrl: js.Object = js.native
+  def updateParams(newParams: js.Dictionary[String]): Unit = js.native
 
 }
 
 /**
- * Route Service Singleton
+ * Reference to the current route definition. The route definition contains:
+ * <ul>
+ * <li>controller: The controller constructor as define in route definition</li>
+ * <li> locals: A map of locals which is used by $controller service for controller instantiation.
+ * The locals contain the resolved values of the resolve map. Additionally the locals also contain:
+ * <ul>
+ * <li>$scope - The current route scope.</li>
+ * <li>$template - The current route template HTML.</li>
+ * </ul>
+ * </li>
+ * </ul>
  */
-object Route {
-
-  def apply(controller: String = null,
-            controllerFn: js.Function = null,
-            controllerAs: String = null,
-            resolve: js.Dictionary[js.Object] = null,
-            redirectTo: String = null,
-            redirectToFn: js.Function3[js.Array[Any], String, js.Object, Unit] = null,
-            reloadOnSearch: Boolean = true,
-            template: String = null,
-            templateFn: js.Function1[js.Array[Any], String] = null,
-            templateUrl: String = null,
-            templateUrlFn: js.Function1[js.Array[Any], String] = null): Route = {
-    val r = js.Dictionary[Any]()
-    if (controller != null) r("controller") = controller
-    if (controllerFn != null) r("controller") = controllerFn
-    if (controllerAs != null) r("controllerAs") = controllerAs
-    if (resolve != null) r("resolve") = resolve
-    if (redirectTo != null) r("redirectTo") = redirectTo
-    if (redirectToFn != null) r("redirectTo") = redirectToFn
-    r("reloadOnSearch") = reloadOnSearch
-    if (template != null) r("template") = template
-    if (templateFn != null) r("template") = templateFn
-    if (templateUrl != null) r("templateUrl") = templateUrl
-    if (templateUrlFn != null) r("templateUrl") = templateUrlFn
-    r.asInstanceOf[Route]
-  }
+trait RouteCurrent extends js.Object {
+  var controller: String = js.native
+  var locals: js.Dictionary[Any] = js.native
+  var $scope: Scope = js.native
+  var $template: String = js.native
 }
 
 /**
- * Route Provider
+ * Route Provider - Used for configuring routes.
+ * @see [[https://docs.angularjs.org/api/ngRoute/provider/\$routeProvider]]
  */
 trait RouteProvider extends js.Object {
 
-  def when(path: String, route: Route): RouteProvider = js.native
+  /**
+   * A boolean property indicating if routes defined using this provider should be matched using a
+   * case insensitive algorithm. Defaults to false.
+   */
+  var caseInsensitiveMatch: Boolean = js.native
 
-  def otherwise(params: Route): RouteProvider = js.native
+  /**
+   * Adds a new route definition to the \$route service.
+   * @param path Route path (matched against $location.path). If $location.path contains redundant trailing slash
+   *             or is missing one, the route will still match and the $location.path will be updated to add or drop
+   *             the trailing slash to exactly match the route definition.
+   * @param route Mapping information to be assigned to $route.current on route match.
+   * @return self
+   */
+  def when(path: String, route: RouteTo): this.type = js.native
+
+  /**
+   * Sets route definition that will be used on route change when no other route definition is matched.
+   * @param params Mapping information to be assigned to $route.current. If called with a string,
+   *               the value maps to redirectTo.
+   * @return self
+   */
+  def otherwise(params: RouteTo): this.type = js.native
 
 }

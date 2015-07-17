@@ -2,16 +2,16 @@ lazy val root = (project in file(".")).
   enablePlugins(ScalaJSPlugin).
   settings(
     name := "scalascript",
-    description := "AngularJS bindings for Scala.js.",
+    description := "AngularJS binding for Scala.js.",
     organization := "com.github.ldaniels528",
-    version := "0.1.2",
-    scalaVersion := "2.11.7",
+    version := "0.1",
+    scalaVersion := "2.11.6",
     scalacOptions ++= Seq("-feature", "-deprecation"),
     homepage := Some(url("http://github.com.ldaniels528/scalascript")),
     addCompilerPlugin("org.scalamacros" % "paradise" % "2.0.1" cross CrossVersion.full),
     libraryDependencies ++= Seq(
       "be.doeraene" %%% "scalajs-jquery" % "0.8.0",
       "org.scala-js" %%% "scalajs-dom" % "0.8.1",
-      "org.scala-lang" % "scala-reflect" % "2.11.7"
+      "org.scala-lang" % "scala-reflect" % "2.11.6"
     )
   )
