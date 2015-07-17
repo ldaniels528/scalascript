@@ -10,9 +10,11 @@ import scala.scalajs.js
  */
 trait Toaster extends js.Object {
 
-  def pop(`type`: js.Any, title: js.Any, message: js.Any): Unit = js.native
-
-  def pop(`type`: js.Any, title: js.Any, message: js.Any, delay: Long, format: js.Any): Unit = js.native
+  def pop(`type`: js.Any = js.native,
+          title: js.Any,
+          message: js.Any = js.native,
+          delay: Long = js.native,
+          format: js.Any = js.native): Unit = js.native
 
 }
 

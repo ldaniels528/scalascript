@@ -109,6 +109,7 @@ trait Scope extends js.Object {
    * <ul>
    * <li>it will execute after the function that scheduled the evaluation (preferably before DOM rendering).</li>
    * <li>at least one $digest cycle will be performed after expression execution.</li>
+   * </ul>
    * @param expression An angular expression to be executed.
    * @param locals Local variables object, useful for overriding values in scope.
    * @return
