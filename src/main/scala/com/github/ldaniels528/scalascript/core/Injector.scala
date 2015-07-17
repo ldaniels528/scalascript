@@ -43,7 +43,7 @@ trait Injector extends js.Object {
    *               before the $injector is consulted.
    * @return new instance of Type.
    */
-  def instantiate(`type`: js.Function, locals: js.Object = js.native): js.Object = js.native
+  def instantiate[T <: js.Object](`type`: js.Function, locals: js.Object = js.native): T = js.native
 
   /**
    * Returns an array of service names which the function is requesting for injection. This API is used by the
