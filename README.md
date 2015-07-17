@@ -57,7 +57,7 @@ val yesNo: js.Function = () => ((state: Boolean) => if (state) "Yes" else "No"):
 module.filter("yesno", yesNo)
 ```
 
-### Controller Example
+### Controller Example 1: Js.Dynamic Impelementation
 
 ```scala
 module.controllerOf[AwardsController]("AwardsCtrl")
@@ -83,6 +83,94 @@ class AwardsController($scope: js.Dynamic, $http: Http, @injected("MySession") m
       award.owned = mySession.getMyAwards().contains(award.code.as[String])
     }
   }
+}
+```
+
+In the example above, we're using a Scala.js JSON literal as our scope. While this is very flexible, it's not at all 
+type-safe. In addition, most IDE's will be unable to provide any useful type inference information. 
+
+### Controller Example 2: Type-Safe Implementation
+
+```scala
+class AwardsController($scope: Scope, $http: Http, @injected("MySession") mySession: MySession)
+  extends Controller {
+
+  ///////////////////////////////////////////////////////////////////////////
+  //          Public Functions
+  ///////////////////////////////////////////////////////////////////////////
+
+  @scoped def getAwards = Award.AvailableAwards map { award =>
+    val myAward = award.asInstanceOf[MyAward]
+    myAward.owned = mySession.getMyAwards.contains(award.code)
+    myAward
+  } sortBy (_.owned) reverse
+
+  @scoped def getAwardImage(code: String) = AwardIconsByCode.get(code).orNull
+
+  @scoped def getMyAwards = mySession.getMyAwards map (code => AwardsByCode.get(code).orNull)
+
+}
+
+trait Award extends js.Object {
+  var name: String = js.native
+  var code: String = js.native
+  var icon: String = js.native
+  var description: String = js.native
+}
+
+trait MyAward extends Award {
+  var owned: Boolean = js.native
+}
+```
+
+In the example above, we using a generic scope object because we don't need to specify any custom scope variables, and 
+we're using the `@scope` macro annotation to attach our methods to the `$scope` variable. 
+
+### Modal Dialog &#8212; Controller and Service
+
+```scala
+class InvitePlayerDialog($http: Http, $modal: Modal) extends Service {
+  def popup(participant: Participant): Future[InvitePlayerDialogResult] = {
+    val modalInstance = $modal.open[InvitePlayerDialogResult](ModalOptions(
+      templateUrl = "invite_player_dialog.htm",
+      controllerClass = classOf[InvitePlayerDialogController]
+    ))
+    modalInstance.result
+  }
+}
+
+class InvitePlayerDialogController($scope: InvitePlayerScope, $modalInstance: ModalInstance[InvitePlayerDialogResult],
+                                   @injected("MySession") mySession: MySession)
+  extends Controller {
+
+  private val myFriends = mySession.fbFriends
+  $scope.invites = emptyArray[TaggableFriend]
+
+  @scoped def getFriends = myFriends
+
+  @scoped def getInvitedCount = $scope.invites.count(invitee => isDefined(invitee))
+
+  @scoped def getInvites = $scope.invites
+
+  @scoped def ok() = $modalInstance.close(getSelectedFriends)
+
+  @scoped def cancel() = $modalInstance.dismiss("cancel")
+
+  private def getSelectedFriends = {
+    val selectedFriends = emptyArray[TaggableFriend]
+    for (n <- 0 to $scope.invites.length) {
+      if (isDefined($scope.invites(n))) selectedFriends.push(myFriends(n))
+    }
+    selectedFriends
+  }
+}
+
+trait InvitePlayerScope extends Scope {
+  var invites: js.Array[TaggableFriend] = js.native
+}
+
+object InvitePlayerDialogController {
+  type InvitePlayerDialogResult = js.Array[TaggableFriend]
 }
 ```
 
