@@ -26,15 +26,15 @@ module.filter("yesno", Filters.yesNo)
 module.controllerOf[DiscoverController]("DiscoverController")
 module.serviceOf[FacebookService]("Facebook")
 module.serviceOf[MySession]
-module.serviceOf[QuoteService]("QuoteService")
+module.serviceOf[QuoteService]
 
 // define the routes
 module.config({ ($routeProvider: RouteProvider) =>
   $routeProvider
-    .when("/about/us", Route(templateUrl = "/assets/views/about/us.htm"))
-    .when("/discover", Route(templateUrl = "/assets/views/discover/discover.htm", controller = "DiscoverController"))
-    .when("/discover/:symbol", Route(templateUrl = "/assets/views/discover/discover.htm", controller = "DiscoverController"))
-    .otherwise(Route(redirectTo = "/about/us"))
+    .when("/about/us", RouteTo(templateUrl = "/assets/views/about/us.htm"))
+    .when("/discover", RouteTo(templateUrl = "/assets/views/discover/discover.htm", controller = "DiscoverController"))
+    .when("/discover/:symbol", RouteTo(templateUrl = "/assets/views/discover/discover.htm", controller = "DiscoverController"))
+    .otherwise(RouteTo(redirectTo = "/about/us"))
 })
 
 // initialize the application

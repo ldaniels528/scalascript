@@ -70,10 +70,17 @@ trait Location extends js.Object {
   /**
    * This method is getter / setter.
    * Changes hash fragment when called with parameter and return \$location.
+   * @return hash fragment when called without any parameter.
+   */
+  def hash(): String = js.native
+
+  /**
+   * This method is getter / setter.
+   * Changes hash fragment when called with parameter and return \$location.
    * @param hash New hash fragment
    * @return hash fragment when called without any parameter.
    */
-  def hash(hash: String = js.native): String = js.native
+  def hash(hash: String): Unit = js.native
 
   /**
    * If called, all changes to $location during current $digest will be replacing current history record,

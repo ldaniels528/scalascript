@@ -13,7 +13,7 @@ trait RouteTo extends js.Object {
    * Controller function that should be associated with newly created scope or the name of a registered controller
    * if passed as a string (string or function).
    */
-  var controller: Any = js.native
+  var controller: js.Any = js.native
 
   /**
    * An identifier name for a reference to the controller. If present, the controller will be published to scope under
@@ -63,28 +63,32 @@ trait RouteTo extends js.Object {
  */
 object RouteTo {
 
-  def apply(controller: UndefOr[Any] = js.undefined,
+  def apply(controller: UndefOr[String] = js.undefined,
+            controllerFn: UndefOr[js.Function] = js.undefined,
             controllerAs: UndefOr[String] = js.undefined,
             template: UndefOr[String] = js.undefined,
+            templateFn: UndefOr[js.Function] = js.undefined,
             templateUrl: UndefOr[String] = js.undefined,
+            templateUrlFn: UndefOr[js.Function] = js.undefined,
             resolve: UndefOr[js.Dictionary[js.Any]] = js.undefined,
             redirectTo: UndefOr[String] = js.undefined,
+            redirectToFn: UndefOr[js.Function] = js.undefined,
             reloadOnSearch: UndefOr[Boolean] = js.undefined,
             caseInsensitiveMatch: UndefOr[Boolean] = js.undefined) = {
     val route = new js.Object().asInstanceOf[RouteTo]
     controller.foreach(route.controller = _)
+    controllerFn.foreach(route.controller = _)
     controllerAs.foreach(route.controllerAs = _)
     template.foreach(route.template = _)
+    templateFn.foreach(route.template = _)
     templateUrl.foreach(route.templateUrl = _)
+    templateUrlFn.foreach(route.templateUrl = _)
     resolve.foreach(route.resolve = _)
     redirectTo.foreach(route.redirectTo = _)
+    redirectToFn.foreach(route.redirectTo = _)
     reloadOnSearch.foreach(route.reloadOnSearch = _)
     caseInsensitiveMatch.foreach(route.reloadOnSearch = _)
     route
   }
-
-  implicit def UnwrapEitherLeft[A, B](someThing: Option[Either[A, B]]): Option[A] = someThing.flatMap(_.left.toOption)
-
-  implicit def UnwrapEitherRight[A, B](someThing: Option[Either[A, B]]): Option[B] = someThing.flatMap(_.right.toOption)
 
 }

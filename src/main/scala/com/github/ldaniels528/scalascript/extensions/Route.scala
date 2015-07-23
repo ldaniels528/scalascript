@@ -40,14 +40,14 @@ trait Route extends js.Object {
 /**
  * Reference to the current route definition. The route definition contains:
  * <ul>
- * <li>controller: The controller constructor as define in route definition</li>
- * <li> locals: A map of locals which is used by $controller service for controller instantiation.
+ *  <li>controller: The controller constructor as define in route definition</li>
+ *  <li> locals: A map of locals which is used by $controller service for controller instantiation.
  * The locals contain the resolved values of the resolve map. Additionally the locals also contain:
- * <ul>
- * <li>$scope - The current route scope.</li>
- * <li>$template - The current route template HTML.</li>
- * </ul>
- * </li>
+ *    <ul>
+ *      <li>$scope - The current route scope.</li>
+ *      <li>$template - The current route template HTML.</li>
+ *    </ul>
+ *  </li>
  * </ul>
  */
 trait RouteCurrent extends js.Object {
