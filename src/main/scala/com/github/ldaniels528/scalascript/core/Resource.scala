@@ -63,7 +63,7 @@ trait ResourceClass extends js.Object {
 /**
  * Resource Provider
  */
-trait ResourceProvider extends js.Object {
+trait ResourceProvider extends Provider[Resource] {
   var defaults: js.Dynamic = js.native
 
 }

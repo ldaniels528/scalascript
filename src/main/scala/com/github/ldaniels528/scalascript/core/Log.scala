@@ -44,7 +44,7 @@ trait Log extends js.Object {
 /**
  * AngularJS Log Provider - Use the \$logProvider to configure how the application logs messages
  */
-trait LogProvider extends js.Object {
+trait LogProvider extends Provider[Log] {
 
   /**
    * Enable or disable debug level messages

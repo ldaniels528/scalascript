@@ -1,5 +1,7 @@
 package com.github.ldaniels528.scalascript.extensions
 
+import com.github.ldaniels528.scalascript.core.Provider
+
 import scala.scalajs.js
 
 /**
@@ -18,7 +20,7 @@ trait AnchorScroll extends js.Object {
  * AnchorScroll Provider
  * @see [[https://docs.angularjs.org/api/ng/provider/\$anchorScrollProvider]]
  */
-trait AnchorScrollProvider extends js.Object {
+trait AnchorScrollProvider extends Provider[AnchorScroll] {
 
   def disableAutoScrolling(): js.Any = js.native
 

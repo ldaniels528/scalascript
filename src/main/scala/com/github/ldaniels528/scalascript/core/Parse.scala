@@ -16,6 +16,4 @@ trait Parse extends js.Object {
  * Parse Provider - can be used for configuring the default behavior of the \$parse service.
  * @see [[https://docs.angularjs.org/api/ng/provider/\$parseProvider]]
  */
-trait ParseProvider extends js.Object {
-
-}
+trait ParseProvider extends Provider[Parse]

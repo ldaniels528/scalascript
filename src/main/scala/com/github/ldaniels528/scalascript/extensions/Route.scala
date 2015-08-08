@@ -1,6 +1,7 @@
 package com.github.ldaniels528.scalascript.extensions
 
 import com.github.ldaniels528.scalascript.Scope
+import com.github.ldaniels528.scalascript.core.Provider
 
 import scala.scalajs.js
 
@@ -61,7 +62,7 @@ trait RouteCurrent extends js.Object {
  * Route Provider - Used for configuring routes.
  * @see [[https://docs.angularjs.org/api/ngRoute/provider/\$routeProvider]]
  */
-trait RouteProvider extends js.Object {
+trait RouteProvider extends Provider[Route] {
 
   /**
    * A boolean property indicating if routes defined using this provider should be matched using a

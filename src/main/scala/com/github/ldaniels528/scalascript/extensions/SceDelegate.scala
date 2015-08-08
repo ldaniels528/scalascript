@@ -1,5 +1,7 @@
 package com.github.ldaniels528.scalascript.extensions
 
+import com.github.ldaniels528.scalascript.core.Provider
+
 import scala.scalajs.js
 
 /**
@@ -54,7 +56,7 @@ trait SceDelegate extends js.Object {
  * SCE Delegate Provider
  * @see [[https://docs.angularjs.org/api/ng/provider/\$sceDelegateProvider]]
  */
-trait SceDelegateProvider extends js.Object {
+trait SceDelegateProvider extends Provider[SceDelegate] {
 
   /**
    * Sets/Gets the whitelist of trusted resource URLs.

@@ -102,7 +102,7 @@ trait Location extends js.Object {
  * Location Provider - Use the \$locationProvider to configure how the application deep linking paths are stored.
  * @see [[https://docs.angularjs.org/api/ng/provider/\$locationProvider]]
  */
-trait LocationProvider extends js.Object {
+trait LocationProvider extends Provider[Location] {
 
   /**
    * Retrieves or sets the hash prefix

@@ -1,5 +1,7 @@
 package com.github.ldaniels528.scalascript.extensions
 
+import com.github.ldaniels528.scalascript.core.Provider
+
 import scala.scalajs.js
 
 /**
@@ -229,7 +231,7 @@ object Sce {
  * SCE Provider - The \$sceProvider provider allows developers to configure the $sce service.
  * @see [[https://docs.angularjs.org/api/ng/provider/\$sceProvider]]
  */
-trait SceProvider extends js.Object {
+trait SceProvider extends Provider[Sce] {
 
   /**
    * Enables/disables SCE and returns the current value.

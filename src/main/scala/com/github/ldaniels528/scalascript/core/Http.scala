@@ -87,7 +87,7 @@ trait Http extends js.Object {
  * HTTP Provider Service - Use \$httpProvider to change the default behavior of the [[Http \$http]] service.
  * @author lawrence.daniels@gmail.com
  */
-trait HttpProvider extends js.Object {
+trait HttpProvider extends Provider[Http] {
 
   /**
    * Configure $http service to combine processing of multiple http responses received at around the
