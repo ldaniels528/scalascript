@@ -1,6 +1,6 @@
 package com.github.ldaniels528.scalascript
 
-import com.github.ldaniels528.scalascript.core.{Attributes, JQLite}
+import com.github.ldaniels528.scalascript.core.Attributes
 
 import scala.scalajs.js
 

@@ -1,7 +1,7 @@
 package com.github.ldaniels528.scalascript
 
 import com.github.ldaniels528.scalascript.Module.EnrichedModule
-import com.github.ldaniels528.scalascript.core.{Injector, JQLite}
+import com.github.ldaniels528.scalascript.core.Injector
 import org.scalajs.dom.html.{Document, Element}
 import org.scalajs.jquery.JQuery
 
@@ -79,9 +79,9 @@ trait Angular extends js.Object {
 
   def copy(source: js.Any, destination: js.Any): js.Any = js.native
 
-  def element(elem: Element): AngularElement = js.native
+  def element(elem: Element): JQLite = js.native
 
-  def element(jQuery: JQuery): AngularElement = js.native
+  def element(jQuery: JQuery): JQLite = js.native
 
   /**
    * Determines if two objects or two values are equivalent. Supports value types, regular expressions, arrays and objects.
@@ -292,7 +292,7 @@ object Angular {
     .getOrElse(throw new RuntimeException("Could not find object angular - has the AngularJS library been loaded?"))
 
   @inline
-  implicit def element(elem: Element): AngularElement = angular.element(elem)
+  implicit def element(elem: Element): JQLite = angular.element(elem)
 
   @inline
   final implicit class RichAngular(val self: Angular) extends AnyVal {
