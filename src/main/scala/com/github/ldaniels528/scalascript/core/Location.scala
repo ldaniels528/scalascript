@@ -16,11 +16,17 @@ trait Location extends js.Object {
   def absUrl(): String = js.native
 
   /**
-   * This method is getter / setter.
+   * This method is setter.
    * @param url New url without base prefix (e.g. /path?a=b#hash)
    * @return url (e.g. /path?a=b#hash) when called without any parameter.
    */
-  def url(url: String = js.native): String = js.native
+  def url(url: String): Unit = js.native
+
+  /**
+   * This method is getter.
+   * @return url (e.g. /path?a=b#hash) when called without any parameter.
+   */
+  def url(): String = js.native
 
   /**
    * This method is getter only.
@@ -43,11 +49,17 @@ trait Location extends js.Object {
   def port(): Int = js.native
 
   /**
-   * This method is getter / setter.
-   * @param path New path (optional)
+   * This method is getter.
    * @return path of current url when called without any parameter.
    */
-  def path(path: String = js.native): String = js.native
+  def path(): js.UndefOr[String] = js.native
+
+  /**
+   * This method is setter.
+   * @param path New path
+   * @return path of current url when called without any parameter.
+   */
+  def path(path: String): Unit = js.native
 
   /**
    * This method is getter / setter. Return search part (as object) of current url when called without any parameter.
