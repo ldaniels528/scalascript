@@ -12,6 +12,7 @@ import scala.scalajs.js
  * AngularJS 1.4.2 Binding
  * @author lawrence.daniels@gmail.com
  */
+@js.native
 trait Angular extends js.Object {
 
   /**
@@ -263,6 +264,7 @@ case class AngularConfiguration(strictDi: Boolean = false)
  * An object that contains information about the current AngularJS version.
  * @see [[https://docs.angularjs.org/api/ng/object/angular.version]]
  */
+@js.native
 trait AngularVersion extends js.Object {
   // Full version string, such as "0.9.18".
   var full: String = js.native

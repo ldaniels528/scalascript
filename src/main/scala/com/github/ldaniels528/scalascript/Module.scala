@@ -9,29 +9,30 @@ import scala.scalajs.js
  * AngularJS Module
  * @author lawrence.daniels@gmail.com
  */
+@js.native
 trait Module extends js.Object {
 
-  def name: String = js.native
+  def name: String 
 
-  def animation(name: String, dependencies: js.Array[Any]): this.type = js.native
+  def animation(name: String, dependencies: js.Array[Any]): this.type 
 
-  def config(dependencies: js.Array[Any]): this.type = js.native
+  def config(dependencies: js.Array[Any]): this.type 
 
-  def constant(name: String, value: js.Any): this.type = js.native
+  def constant(name: String, value: js.Any): this.type 
 
-  def controller(name: String, constructor: js.Array[Any]): this.type = js.native
+  def controller(name: String, constructor: js.Array[Any]): this.type 
 
-  def directive(name: String, constructor: js.Array[Any]): this.type = js.native
+  def directive(name: String, constructor: js.Array[Any]): this.type 
 
-  def factory(name: String, constructor: js.Array[Any]): this.type = js.native
+  def factory(name: String, constructor: js.Array[Any]): this.type 
 
-  def filter(name: String, fn: js.Function): this.type = js.native
+  def filter(name: String, fn: js.Function): this.type 
 
-  def provider(name: String, constructor: js.Array[Any]): this.type = js.native
+  def provider(name: String, constructor: js.Array[Any]): this.type 
 
-  def run(initialization: js.Array[Any]): this.type = js.native
+  def run(initialization: js.Array[Any]): this.type 
 
-  def service(name: String, constructor: js.Array[Any]): this.type = js.native
+  def service(name: String, constructor: js.Array[Any]): this.type 
 
 }
 

@@ -10,6 +10,7 @@ import scala.scalajs.js
  * @see [[https://docs.angularjs.org/api/ng/function/angular.element]]
  * @author lawrence.daniels@gmail.com
  */
+@js.native
 trait JQLite extends Element {
 
   /**
@@ -17,7 +18,7 @@ trait JQLite extends Element {
    * @param className the given class name
    * @return the [[JQLite instance]]
    */
-  def addClass(className: String): this.type = js.native
+  def addClass(className: String): this.type
 
   /**
    * A function returning one or more space-separated class names to be added to the existing class name(s).

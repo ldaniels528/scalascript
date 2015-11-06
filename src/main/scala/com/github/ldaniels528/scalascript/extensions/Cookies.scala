@@ -7,6 +7,7 @@ import scala.scalajs.js
  * @author lawrence.daniels@gmail.com
  * @see [[https://docs.angularjs.org/api/ngCookies/service/$cookies]]
  */
+@js.native
 trait Cookies extends js.Object {
 
   /**
@@ -15,17 +16,17 @@ trait Cookies extends js.Object {
    * @tparam T the cookie value's type
    * @return the value of given cookie key
    */
-  def get[T](key: String): js.UndefOr[T] = js.native
+  def get[T](key: String): js.UndefOr[T]
 
-  def getAll(): js.Any = js.native
+  def getAll(): js.Any
 
-  def getObject[T](key: String): js.UndefOr[T] = js.native
+  def getObject[T](key: String): js.UndefOr[T]
 
-  def put[T](key: String, value: T): Unit = js.native
+  def put[T](key: String, value: T): Unit
 
-  def putObject[T](key: String, value: T, options: js.Any = null): Unit = js.native
+  def putObject[T](key: String, value: T, options: js.Any = null): Unit
 
-  def remove(key: String, options: js.Any = null): js.Any = js.native
+  def remove(key: String, options: js.Any = null): js.Any
 
 }
 
