@@ -7,6 +7,7 @@ import scala.scalajs.js
  * and makes the URL available to your application.
  * @see [[https://docs.angularjs.org/api/ng/service/\$location]]
  */
+@js.native
 trait Location extends js.Object {
 
   /**
@@ -114,6 +115,7 @@ trait Location extends js.Object {
  * Location Provider - Use the \$locationProvider to configure how the application deep linking paths are stored.
  * @see [[https://docs.angularjs.org/api/ng/provider/\$locationProvider]]
  */
+@js.native
 trait LocationProvider extends Provider[Location] {
 
   /**

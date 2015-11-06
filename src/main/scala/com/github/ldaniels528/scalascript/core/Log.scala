@@ -7,6 +7,7 @@ import scala.scalajs.js
  * into the browser's console (if present).
  * @see [[https://docs.angularjs.org/api/ng/service/\$log]]
  */
+@js.native
 trait Log extends js.Object {
 
   /**
@@ -44,6 +45,7 @@ trait Log extends js.Object {
 /**
  * AngularJS Log Provider - Use the \$logProvider to configure how the application logs messages
  */
+@js.native
 trait LogProvider extends Provider[Log] {
 
   /**

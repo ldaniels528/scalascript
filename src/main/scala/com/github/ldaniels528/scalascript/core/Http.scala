@@ -8,6 +8,7 @@ import scala.scalajs.js
  * with the remote HTTP servers via the browser's XMLHttpRequest object or via JSONP.
  * @see https://docs.angularjs.org/api/ng/service/\$http
  */
+@js.native
 trait Http extends js.Object {
 
   /**
@@ -87,6 +88,7 @@ trait Http extends js.Object {
  * HTTP Provider Service - Use \$httpProvider to change the default behavior of the [[Http \$http]] service.
  * @author lawrence.daniels@gmail.com
  */
+@js.native
 trait HttpProvider extends Provider[Http] {
 
   /**
@@ -133,6 +135,7 @@ trait HttpProvider extends Provider[Http] {
  * <li>statusText – {string} – HTTP status text of the response.</li>
  * </ul>
  */
+@js.native
 trait HttpResponse extends js.Object {
   var status: Int = js.native
   var statusText: String = js.native

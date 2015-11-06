@@ -9,6 +9,7 @@ import scala.scalajs.js
  * AngularJS File Upload
  * @author lawrence.daniels@gmail.com
 */
+@js.native
 trait FileUpload extends js.Object {
 
   def upload[T <: js.Any](config: FileUploadConfig): FileUploadPromise[T] = js.native
@@ -19,6 +20,7 @@ trait FileUpload extends js.Object {
  * File Upload Configuration
  * @author lawrence.daniels@gmail.com
  */
+@js.native
 trait FileUploadConfig extends js.Object {
   var data: Any = js.native
   var file: File = js.native
@@ -33,6 +35,7 @@ trait FileUploadConfig extends js.Object {
  * File Upload Configuration Singleton
  * @author lawrence.daniels@gmail.com
  */
+@js.native
 object FileUploadConfig {
 
   def apply[T](url: String, file: File, data: Option[T] = None) = {
@@ -51,6 +54,7 @@ object FileUploadConfig {
  * File Upload Promise
  * @author lawrence.daniels@gmail.com
  */
+@js.native
 trait FileUploadPromise[T <: js.Any] extends HttpPromise[T] {
 
   def progress(listener: js.Function1[ProgressEvent, Unit]): this.type = js.native
@@ -62,6 +66,7 @@ trait FileUploadPromise[T <: js.Any] extends HttpPromise[T] {
  * Progress Event
  * @author lawrence.daniels@gmail.com
  */
+@js.native
 class ProgressEvent extends js.Object {
 
   val loaded: Double = js.native

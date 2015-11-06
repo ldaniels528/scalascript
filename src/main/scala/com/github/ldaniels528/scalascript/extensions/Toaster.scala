@@ -8,6 +8,7 @@ import scala.scalajs.js
  * @author lawrence.daniels@gmail.com
  * @see https://github.com/jirikavi/AngularJS-Toaster
  */
+@js.native
 trait Toaster extends js.Object {
 
   def pop(`type`: js.Any = js.native,

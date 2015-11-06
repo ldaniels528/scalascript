@@ -7,6 +7,7 @@ import scala.scalajs.js
  * instantiate types, invoke methods, and load modules.
  * @see [[https://docs.angularjs.org/api/auto/service/\$injector]]
  */
+@js.native
 trait Injector extends js.Object {
 
   /**

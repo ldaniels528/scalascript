@@ -10,6 +10,7 @@ import scala.scalajs.js
  * It watches \$location.url() and tries to map the path to an existing route definition.
  * @see [[https://docs.angularjs.org/api/ngRoute/service/\$route]]
  */
+@js.native
 trait Route extends js.Object {
 
   /**
@@ -51,6 +52,7 @@ trait Route extends js.Object {
  *  </li>
  * </ul>
  */
+@js.native
 trait RouteCurrent extends js.Object {
   var controller: String = js.native
   var locals: js.Dictionary[Any] = js.native
@@ -62,6 +64,7 @@ trait RouteCurrent extends js.Object {
  * Route Provider - Used for configuring routes.
  * @see [[https://docs.angularjs.org/api/ngRoute/provider/\$routeProvider]]
  */
+@js.native
 trait RouteProvider extends Provider[Route] {
 
   /**

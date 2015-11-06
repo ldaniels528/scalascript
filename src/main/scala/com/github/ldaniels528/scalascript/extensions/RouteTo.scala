@@ -7,6 +7,7 @@ import scala.scalajs.js.UndefOr
 /**
  * Type-Safe AngularJS Route
  */
+@js.native
 trait RouteTo extends js.Object {
 
   /**

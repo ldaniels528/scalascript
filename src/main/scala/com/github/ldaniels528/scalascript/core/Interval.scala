@@ -8,6 +8,7 @@ import scala.scalajs.js
  * Interval Service - Angular's wrapper for window.setInterval.
  * @see [[https://docs.angularjs.org/api/ng/service/\$interval]]
  */
+@js.native
 trait Interval extends js.Object {
 
   /**

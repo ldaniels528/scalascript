@@ -8,6 +8,7 @@ import scala.scalajs.js
  * Timeout Service - Angular's wrapper for window.setTimeout.
  * @see [[https://docs.angularjs.org/api/ng/service/\$timeout]]
  */
+@js.native
 trait Timeout extends js.Object {
 
   /**

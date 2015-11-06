@@ -13,6 +13,7 @@ import scala.util.{Failure, Success, Try}
  * and use their return values (or exceptions) when they are done processing.
  * @see [[https://docs.angularjs.org/api/ng/service/\$q]]
  */
+@js.native
 trait Q extends js.Object {
 
   /**
@@ -67,6 +68,7 @@ trait Q extends js.Object {
  * AngularJS Q Deferral
  * @author lawrence.daniels@gmail.com
  */
+@js.native
 trait QDefer[T] extends js.Object {
 
   /**
@@ -138,6 +140,7 @@ object QDefer {
  * AngularJS Q-Promise
  * @author lawrence.daniels@gmail.com
  */
+@js.native
 trait QPromise[T] extends AngularPromise {
 
   /**

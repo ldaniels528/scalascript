@@ -6,6 +6,7 @@ import scala.scalajs.js
  * Exception Handler - Any uncaught exception in angular expressions is delegated to this service.
  * @see [[https://docs.angularjs.org/api/ng/service/\$exceptionHandler]]
  */
+@js.native
 trait ExceptionHandler extends js.Object {
 
   /**

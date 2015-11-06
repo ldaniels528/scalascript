@@ -11,6 +11,7 @@ import scala.scalajs.js.UndefOr
  * AngularJS HTTP Promise
  * @author lawrence.daniels@gmail.com
  */
+@js.native
 trait HttpPromise[T <: js.Any] extends AngularPromise {
 
   def error(callback: js.Function): HttpPromise[T] = js.native

@@ -9,6 +9,7 @@ import scala.scalajs.js
  * Strict Contextual Escaping (SCE) services to AngularJS
  * @see [[https://docs.angularjs.org/api/ng/service/\$sceDelegate]]
  */
+@js.native
 trait SceDelegate extends js.Object {
 
   /**
@@ -56,6 +57,7 @@ trait SceDelegate extends js.Object {
  * SCE Delegate Provider
  * @see [[https://docs.angularjs.org/api/ng/provider/\$sceDelegateProvider]]
  */
+@js.native
 trait SceDelegateProvider extends Provider[SceDelegate] {
 
   /**

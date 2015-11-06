@@ -10,6 +10,7 @@ import scala.scalajs.js
  * @author lawrence.daniels@gmail.com
  * @see http://angular-ui.github.io/bootstrap/#/modal
  */
+@js.native
 trait Modal extends js.Object {
 
   /**
@@ -26,6 +27,7 @@ trait Modal extends js.Object {
  * AngularJS Modal Instance ($modalInstance)
  * @author lawrence.daniels@gmail.com
  */
+@js.native
 trait ModalInstance[T] extends js.Object {
 
   def close(): Unit = js.native
@@ -44,6 +46,7 @@ trait ModalInstance[T] extends js.Object {
  * Modal Options
  * @author lawrence.daniels@gmail.com
  */
+@js.native
 trait ModalOptions extends js.Object {
   var template: String = js.native
   var templateUrl: String = js.native

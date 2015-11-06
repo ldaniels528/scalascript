@@ -7,7 +7,8 @@ import scala.scalajs.js
  * @author lawrence.daniels@gmail.com
  * @see [[https://docs.angularjs.org/api/ngCookies/service/$cookies]]
  */
-class CookieStore extends js.Object {
+@js.native
+trait CookieStore extends js.Object {
 
   /**
    * Returns the value of given cookie key

@@ -6,6 +6,7 @@ import scala.scalajs.js
  * Cache Factory Service - Factory that constructs [[Cache Cache]] objects and gives access to them.
  * @see [[https://docs.angularjs.org/api/ng/service/\$cacheFactory]]
  */
+@js.native
 trait CacheFactory extends js.Object {
 
   /**
@@ -35,6 +36,7 @@ trait CacheFactory extends js.Object {
  * Cache Object
  * @see [[https://docs.angularjs.org/api/ng/type/\$cacheFactory.Cache]]
  */
+@js.native
 trait Cache extends js.Object {
 
   /**

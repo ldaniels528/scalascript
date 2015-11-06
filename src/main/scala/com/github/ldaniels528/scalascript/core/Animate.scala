@@ -10,6 +10,7 @@ import scala.scalajs.js
  * Animate Service - The \$animate service exposes a series of DOM utility methods that provide support for animation hooks.
  * @see [[https://docs.angularjs.org/api/ng/service/\$animate]]
  */
+@js.native
 trait Animate extends js.Object {
 
   /**

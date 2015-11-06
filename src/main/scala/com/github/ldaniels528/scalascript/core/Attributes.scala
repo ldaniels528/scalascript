@@ -8,6 +8,7 @@ import scala.scalajs.js.annotation.JSBracketAccess
  * AngularJS Attributes
  * @author lawrence.daniels@gmail.com
  */
+@js.native
 trait Attributes extends js.Object {
 
   @JSBracketAccess

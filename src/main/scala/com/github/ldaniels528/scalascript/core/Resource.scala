@@ -6,6 +6,7 @@ import scala.scalajs.js
  * Resource - A factory which creates a resource object that lets you interact with RESTful server-side data sources.
  * @see [[https://code.angularjs.org/1.4.2/docs/api/ngResource/service/\$resource]]
  */
+@js.native
 trait Resource extends js.Object {
 
   /**
@@ -46,6 +47,7 @@ trait Resource extends js.Object {
  * }
  * </pre>
  */
+@js.native
 trait ResourceClass extends js.Object {
 
   def get[T](params: js.Dictionary[Any], callback: js.Function0[Unit]): T = js.native
@@ -63,6 +65,7 @@ trait ResourceClass extends js.Object {
 /**
  * Resource Provider
  */
+@js.native
 trait ResourceProvider extends Provider[Resource] {
   var defaults: js.Dynamic = js.native
 

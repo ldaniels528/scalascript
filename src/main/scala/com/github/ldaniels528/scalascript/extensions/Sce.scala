@@ -8,6 +8,7 @@ import scala.scalajs.js
  * SCE Service - is a service that provides Strict Contextual Escaping services to AngularJS.
  * @see [[https://docs.angularjs.org/api/ng/provider/\$sceDelegateProvider]]
  */
+@js.native
 trait Sce extends js.Object {
 
   /**
@@ -231,6 +232,7 @@ object Sce {
  * SCE Provider - The \$sceProvider provider allows developers to configure the $sce service.
  * @see [[https://docs.angularjs.org/api/ng/provider/\$sceProvider]]
  */
+@js.native
 trait SceProvider extends Provider[Sce] {
 
   /**

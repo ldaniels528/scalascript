@@ -7,6 +7,7 @@ import scala.scalajs.js.Dynamic.{literal => JS}
  * AngularJS HTTP Service Configuration
  * @author lawrence.daniels@gmail.com
  */
+@js.native
 trait HttpConfig extends js.Object {
   var method: String = js.native
   var url: String = js.native
