@@ -3,7 +3,7 @@ package com.github.ldaniels528.scalascript.extensions.nervgh
 import scala.scalajs.js
 
 /**
-  * nervgh/angular-js-upload
+  * Angular File Uploader (nervgh/angular-js-upload)
   * @author lawrence.daniels@gmail.com
   */
 @js.native
@@ -11,7 +11,7 @@ trait FileUploader extends js.Object {
 
   var filters: js.Array[FileUploadFilter] = js.native
 
-  var onWhenAddingFileFailed: js.Function3[FileUploadItem, FileUploadFilter, js.Object, Unit] = js.native //(item /*{File|FileLikeObject}*/, filter, options)
+  var onWhenAddingFileFailed: js.Function3[FileUploadItem, FileUploadFilter, FileUploadOptions, Unit] = js.native //(item /*{File|FileLikeObject}*/, filter, options)
 
   var onAfterAddingFile: js.Function1[FileUploadItem, Unit] = js.native //(fileItem)
 
@@ -19,17 +19,17 @@ trait FileUploader extends js.Object {
 
   var onBeforeUploadItem: js.Function1[FileUploadItem, Unit] = js.native //(item)
 
-  var onProgressItem: js.Function2[FileUploadItem, js.Object, Unit] = js.native //(fileItem, progress)
+  var onProgressItem: js.Function2[FileUploadItem, FileUploadProgress, Unit] = js.native //(fileItem, progress)
 
-  var onProgressAll: js.Function1[js.Object, Unit] = js.native //(progress)
+  var onProgressAll: js.Function1[FileUploadProgress, Unit] = js.native //(progress)
 
-  var onSuccessItem: js.Function4[FileUploadItem, js.Object, js.Any, js.Object, Unit] = js.native //(fileItem, response, status, headers)
+  var onSuccessItem: js.Function4[FileUploadItem, FileUploadResponse, js.Any, FileUploadHeaders, Unit] = js.native //(fileItem, response, status, headers)
 
-  var onErrorItem: js.Function4[FileUploadItem, js.Object, js.Any, js.Object, Unit] = js.native //(fileItem, response, status, headers)
+  var onErrorItem: js.Function4[FileUploadItem, FileUploadResponse, js.Any, FileUploadHeaders, Unit] = js.native //(fileItem, response, status, headers)
 
-  var onCancelItem: js.Function4[FileUploadItem, js.Object, js.Any, js.Object, Unit] = js.native //(fileItem, response, status, headers)
+  var onCancelItem: js.Function4[FileUploadItem, FileUploadResponse, js.Any, FileUploadHeaders, Unit] = js.native //(fileItem, response, status, headers)
 
-  var onCompleteItem: js.Function4[FileUploadItem, js.Object, js.Any, js.Object, Unit] = js.native //(fileItem, response, status, headers)
+  var onCompleteItem: js.Function4[FileUploadItem, FileUploadResponse, js.Any, FileUploadHeaders, Unit] = js.native //(fileItem, response, status, headers)
 
   var onCompleteAll: js.Function0[Unit] = js.native
 
@@ -49,11 +49,16 @@ object FileUploader {
 
 /**
   * File Upload Item
+  * @example {url: "/api/post/upload", alias: "file", headers: Object, formData: Array[0], removeAfterUpload: false…}
   * @author lawrence.daniels@gmail.com
   */
 @js.native
 trait FileUploadItem extends js.Object {
   var url: String
+  var alias: String
+  var headers: js.Object
+  var formData: js.Array[js.Object]
+  var removeAfterUpload: Boolean
 }
 
 /**
@@ -64,4 +69,40 @@ trait FileUploadItem extends js.Object {
 trait FileUploadFilter extends js.Object {
   var name: String
   var fn: js.Function
+}
+
+/**
+  * File Upload Headers
+  * @author lawrence.daniels@gmail.com
+  */
+@js.native
+trait FileUploadHeaders extends js.Object {
+
+}
+
+/**
+  * File Upload Options
+  * @author lawrence.daniels@gmail.com
+  */
+@js.native
+trait FileUploadOptions extends js.Object {
+
+}
+
+/**
+  * File Upload Progress
+  * @author lawrence.daniels@gmail.com
+  */
+@js.native
+trait FileUploadProgress extends js.Object {
+
+}
+
+/**
+  * File Upload Response
+  * @author lawrence.daniels@gmail.com
+  */
+@js.native
+trait FileUploadResponse extends js.Object {
+
 }
