@@ -20,7 +20,7 @@ trait FileUploaderConfig extends js.Object {
   */
 object FileUploaderConfig {
 
-  def apply(url: String = js.native, filters: js.Array[FileFilter] = js.native) = {
+  def apply(url: js.UndefOr[String] = js.undefined, filters: js.Array[FileFilter] = emptyArray) = {
     val config = makeNew[FileUploaderConfig]
     config.url = url
     config.filters = filters
