@@ -10,7 +10,8 @@ import scala.scalajs.js
   */
 @js.native
 trait FileUploaderConfig extends js.Object {
-  var url: js.UndefOr[String]
+  var url: js.UndefOr[String] = js.native
+  var filters: js.Array[FileFilter] = js.native
 }
 
 /**
@@ -19,9 +20,10 @@ trait FileUploaderConfig extends js.Object {
   */
 object FileUploaderConfig {
 
-  def apply(url: String) = {
+  def apply(url: String = js.native, filters: js.Array[FileFilter] = js.native) = {
     val config = makeNew[FileUploaderConfig]
     config.url = url
+    config.filters = filters
     config
   }
 
