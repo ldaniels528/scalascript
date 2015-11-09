@@ -13,7 +13,6 @@ trait Cookies extends js.Object {
   /**
     * Returns the value of given cookie key
     * @param key the given cookie key
-    * @tparam T the cookie value's type
     * @return the value of given cookie key
     */
   def get(key: String): js.Any
