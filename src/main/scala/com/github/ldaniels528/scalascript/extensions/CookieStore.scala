@@ -42,13 +42,13 @@ trait CookieStore extends js.Object {
 object CookieStore {
 
   /**
-   * Cookie Extensions
-   * @param cookies the given cookies instance
+   * CookieStore Extensions
+   * @param cookieStore the given cookies instance
    */
-  implicit class CookieStroreExtensions(val cookies: Cookies) extends AnyVal {
+  implicit class CookieStoreExtensions(val cookieStore: CookieStore) extends AnyVal {
 
     @inline
-    def getOrElse[T](key: String, defaultValue: T): T = (cookies.get(key) getOrElse defaultValue).asInstanceOf[T]
+    def getOrElse[T](key: String, defaultValue: T): T = (cookieStore.get[T](key) getOrElse defaultValue).asInstanceOf[T]
 
   }
 

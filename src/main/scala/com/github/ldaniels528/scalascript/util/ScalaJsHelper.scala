@@ -134,13 +134,16 @@ object ScalaJsHelper {
     */
   implicit class JsDynamicExtensionsB(val value: String) extends AnyVal {
 
-    def ===(obj: js.Dynamic): Boolean = if (!isDefined(obj)) value == null
-    else {
-      Try(obj.asInstanceOf[String]) match {
-        case Success(converted) => converted == value
-        case Failure(e) =>
-          console.log(s"JsDynamicExtensionsB: value '$value': ${e.getMessage}")
-          false
+    @inline
+    def ===(obj: js.Dynamic): Boolean = {
+      if (!isDefined(obj)) value == null
+      else {
+        Try(obj.asInstanceOf[String]) match {
+          case Success(converted) => converted == value
+          case Failure(e) =>
+            console.log(s"JsDynamicExtensionsB: value '$value': ${e.getMessage}")
+            false
+        }
       }
     }
   }
@@ -189,7 +192,7 @@ object ScalaJsHelper {
 
     @inline def nonBlank: Boolean = string != null && string.trim.nonEmpty
 
-    @inline def isValidEmail: Boolean = !string.matches( """/^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i""")
+    @inline def isValidEmail: Boolean = string.matches("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$")
 
   }
 
