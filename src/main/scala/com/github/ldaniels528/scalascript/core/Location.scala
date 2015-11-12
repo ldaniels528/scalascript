@@ -53,7 +53,7 @@ trait Location extends js.Object {
    * This method is getter.
    * @return path of current url when called without any parameter.
    */
-  def path(): js.UndefOr[String] = js.native
+  def path(): String = js.native
 
   /**
    * This method is setter.
