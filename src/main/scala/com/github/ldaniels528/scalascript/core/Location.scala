@@ -58,9 +58,9 @@ trait Location extends js.Object {
   /**
    * This method is setter.
    * @param path New path
-   * @return path of current url when called without any parameter.
+   * @return a reference to self
    */
-  def path(path: String): Unit = js.native
+  def path(path: String): this.type = js.native
 
   /**
    * This method is getter / setter. Return search part (as object) of current url when called without any parameter.

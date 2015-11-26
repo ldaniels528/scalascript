@@ -1,5 +1,6 @@
 package com.github.ldaniels528.scalascript.extensions.nervgh
 
+import com.github.ldaniels528.scalascript.util.ScalaJsHelper._
 import org.scalajs.dom.Element
 
 import scala.scalajs.js
@@ -244,6 +245,16 @@ object FileUploader {
 trait FileFilter extends js.Object {
   var name: String = js.native
   var fn: js.Function = js.native
+}
+
+object FileFilter {
+
+  def apply(name: String, fn: js.Function) = {
+    val filter = makeNew[FileFilter]
+    filter.name = name
+    filter.fn = fn
+    filter
+  }
 }
 
 /**
