@@ -78,7 +78,7 @@ trait Location extends js.Object {
    * @return If called with no arguments returns the parsed search object. If called with one or more
    *         arguments returns $location object itself.
    */
-  def search(search: js.Any = js.native, paramValue: js.Any = js.native): String = js.native
+  def search(search: js.Any = js.native, paramValue: js.Any = js.native): js.Object = js.native
 
   /**
    * This method is getter / setter.
