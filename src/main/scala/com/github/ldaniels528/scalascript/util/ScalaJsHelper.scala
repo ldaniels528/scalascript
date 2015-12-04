@@ -5,6 +5,7 @@ import org.scalajs.dom.console
 import scala.language.implicitConversions
 import scala.scalajs.js
 import scala.scalajs.js.Dynamic.{global => g}
+import scala.scalajs.js.JSON
 import scala.util.{Failure, Success, Try}
 
 /**
@@ -193,6 +194,19 @@ object ScalaJsHelper {
     @inline def nonBlank: Boolean = string != null && string.trim.nonEmpty
 
     @inline def isValidEmail: Boolean = string.matches("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$")
+
+    @inline def parseAs[T] = JSON.parse(string).asInstanceOf[T]
+
+  }
+
+  /**
+    * UndefOr Extensions
+    * @param op the given [[js.UndefOr undefined or otherwise value]]
+    */
+  implicit class UndefOrExtensions[T](val op: js.UndefOr[T]) extends AnyVal {
+
+    @inline
+    def contains(value: T): Boolean = op.exists(_ == value)
 
   }
 
