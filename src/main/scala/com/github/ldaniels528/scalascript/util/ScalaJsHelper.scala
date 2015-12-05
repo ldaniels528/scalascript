@@ -2,6 +2,7 @@ package com.github.ldaniels528.scalascript.util
 
 import org.scalajs.dom.console
 
+import scala.concurrent.{ExecutionContext, Future}
 import scala.language.implicitConversions
 import scala.scalajs.js
 import scala.scalajs.js.Dynamic.{global => g}
@@ -13,6 +14,7 @@ import scala.util.{Failure, Success, Try}
   * @author lawrence.daniels@gmail.com
   */
 object ScalaJsHelper {
+  val HttpError = "Failed to process HTTP request:"
 
   ////////////////////////////////////////////////////////////////////////
   //    Convenience Functions
@@ -27,6 +29,53 @@ object ScalaJsHelper {
   def params(values: (String, Any)*): String = {
     val queryString = values map { case (k, v) => s"$k=${g.encodeURI(String.valueOf(v))}" } map (_.replaceAllLiterally("&", "%26")) mkString "&"
     if (queryString.nonEmpty) "?" + queryString else queryString
+  }
+
+  ////////////////////////////////////////////////////////////////////////
+  //    Error-Handling Functions
+  ////////////////////////////////////////////////////////////////////////
+
+  /**
+    * Exception Enrichment
+    * @param cause the given [[Throwable exception]]
+    * @author lawrence.daniels@gmail.com
+    */
+  implicit class ExceptionEnrichment(val cause: Throwable) extends AnyVal {
+
+    def displayMessage = cause.getMessage match {
+      case s if s.startsWith(HttpError) => cleanUp(s.drop(HttpError.length))
+      case s => s
+    }
+
+    private def cleanUp(s: String) = s.replaceAllLiterally("\"", "").replaceAllLiterally("'", "")
+
+  }
+
+  ////////////////////////////////////////////////////////////////////////
+  //    Monitoring Functions
+  ////////////////////////////////////////////////////////////////////////
+
+  def time[T](action: String, task: => Future[T], showHeader: Boolean = true)(implicit ec: ExecutionContext): Future[T] = {
+    if (showHeader) console.info(s"$action...")
+    val startTime = System.currentTimeMillis()
+    task onComplete {
+      case Success(_) =>
+        console.info(s"$action took ${System.currentTimeMillis() - startTime} msecs")
+      case Failure(e) =>
+        console.warn(s"$action failed after ${System.currentTimeMillis() - startTime} msecs")
+    }
+    task
+  }
+
+  /**
+    * Time Measurement Enrichment
+    * @param task the given [[Future task]]
+    * @tparam T the return type of the task
+    */
+  implicit class TimeEnrichment[T](val task: Future[T]) extends AnyVal {
+
+    def withTimer(action: String, showHeader: Boolean = true)(implicit ec: ExecutionContext) = time(action, task, showHeader)
+
   }
 
   ////////////////////////////////////////////////////////////////////////
@@ -120,20 +169,10 @@ object ScalaJsHelper {
   }
 
   /**
-    * js.Object Extensions
-    * @param obj the given [[js.Dynamic object]]
-    */
-  implicit class JsDynamicExtensionsA(val obj: js.Dynamic) extends AnyVal {
-
-    @inline def OID_? : Option[String] = if (isDefined(obj._id)) Option(obj._id.$oid.asInstanceOf[String]) else None
-
-  }
-
-  /**
     * Value to js.Dynamic Extensions
     * @param value the given [[String value]]
     */
-  implicit class JsDynamicExtensionsB(val value: String) extends AnyVal {
+  implicit class JsDynamicExtensions(val value: String) extends AnyVal {
 
     @inline
     def ===(obj: js.Dynamic): Boolean = {
@@ -157,12 +196,6 @@ object ScalaJsHelper {
 
     @inline def dynamic = obj.asInstanceOf[js.Dynamic]
 
-    @inline
-    def OID_? : Option[String] = {
-      val dyn = obj.asInstanceOf[js.Dynamic]
-      if (isDefined(dyn._id)) Option(dyn._id.$oid.asInstanceOf[String]) else None
-    }
-
   }
 
   /**
@@ -173,7 +206,7 @@ object ScalaJsHelper {
 
     @inline def ??(optB: => Option[T]): Option[T] = if (optA.isDefined) optA else optB
 
-    @inline def orDie(message: String): Option[T] = throw new IllegalArgumentException(message)
+    @inline def orDie(message: String): Option[T] = if(optA.isDefined) optA else throw new IllegalArgumentException(message)
 
   }
 
@@ -201,12 +234,15 @@ object ScalaJsHelper {
 
   /**
     * UndefOr Extensions
-    * @param op the given [[js.UndefOr undefined or otherwise value]]
+    * @param optA the given [[js.UndefOr undefined or otherwise value]]
     */
-  implicit class UndefOrExtensions[T](val op: js.UndefOr[T]) extends AnyVal {
+  implicit class UndefOrExtensions[T](val optA: js.UndefOr[T]) extends AnyVal {
 
-    @inline
-    def contains(value: T): Boolean = op.exists(_ == value)
+    @inline def ??(optB: => js.UndefOr[T]): js.UndefOr[T] = if (optA.isDefined) optA else optB
+
+    @inline def contains(value: T): Boolean = optA.exists(_ == value)
+
+    @inline def orDie(message: String): js.UndefOr[T] = if(optA.isDefined) optA else throw new IllegalArgumentException(message)
 
   }
 
