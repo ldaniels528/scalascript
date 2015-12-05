@@ -42,9 +42,10 @@ object ScalaJsHelper {
     */
   implicit class ExceptionEnrichment(val cause: Throwable) extends AnyVal {
 
-    def displayMessage = cause.getMessage match {
-      case s if s.startsWith(HttpError) => cleanUp(s.drop(HttpError.length))
-      case s => s
+    def displayMessage = Option(cause.getMessage) match {
+      case Some(s) if s.startsWith(HttpError) => cleanUp(s.drop(HttpError.length))
+      case Some(s) => s
+      case None => "Cause unknown"
     }
 
     private def cleanUp(s: String) = s.replaceAllLiterally("\"", "").replaceAllLiterally("'", "")
