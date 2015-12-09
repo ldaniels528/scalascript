@@ -213,6 +213,13 @@ trait JQLite extends Element {
   def html(): String = js.native
 
   /**
+    * Get the HTML contents of the first element in the set of matched elements.
+    * @param element the given element
+    * @return the HTML contents
+    */
+  def html(element: js.Any): String = js.native
+
+  /**
    * Get the immediately following sibling of each element in the set of matched elements.
    * If a selector is provided, it retrieves the next sibling only if it matches that selector.
    * @param selector A string containing a selector expression to match elements against.

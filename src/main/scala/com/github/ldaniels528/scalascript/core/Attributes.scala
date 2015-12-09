@@ -11,6 +11,8 @@ import scala.scalajs.js.annotation.JSBracketAccess
 @js.native
 trait Attributes extends js.Object {
 
+  def compile: js.Object
+
   @JSBracketAccess
   def apply(name: String): UndefOr[String] = js.native
 
