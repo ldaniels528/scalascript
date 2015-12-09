@@ -79,6 +79,17 @@ trait LinkedInAPIService extends js.Object {
   def MemberUpdates(id: String): LinkedInMemberUpdatesService = js.native
 
   /**
+    * Network Updates service
+    * @see [[https://developer-programs.linkedin.com/documents/inapimemberupdates-and-inapinetworkupdates]]
+    */
+  def NetworkUpdates(): LinkedInNetworkUpdatesService = js.native
+
+  /**
+    * Network Updates service
+    */
+  def NetworkUpdates(id: String): LinkedInNetworkUpdatesService = js.native
+
+  /**
     * People Search service
     * @see [[https://developer-programs.linkedin.com/documents/inapipeoplesearch]]
     */
@@ -202,13 +213,37 @@ trait LinkedInEventService extends js.Object {
 
 }
 
-
 /**
   * LinkedIn API: Member Updates
   * @author lawrence.daniels@gmail.com
   */
 @js.native
 trait LinkedInMemberUpdatesService extends LinkedInPromise[LinkedInMemberUpdateResponse] {
+
+  /**
+    * Specifies the IDs to retrieve.
+    * @param identifiers the given identifiers
+    * @return a reference to [[LinkedInConnectionsService self]]
+    */
+  def ids(identifiers: js.Array[String]): this.type = js.native
+
+  /**
+    * Specifies the fields to retrieve. If not specified, the default fields will be
+    * used: "id", "firstName", "lastName", "headline", "pictureUrl".  A full list of
+    * available fields can be found in Profile Fields.
+    * @param names the given field names
+    * @return a reference to [[LinkedInAPIProfileService self]]
+    */
+  def fields(names: js.Array[String]): this.type = js.native
+
+}
+
+/**
+  * LinkedIn API: Network Updates
+  * @author lawrence.daniels@gmail.com
+  */
+@js.native
+trait LinkedInNetworkUpdatesService extends LinkedInPromise[LinkedInMemberUpdateResponse] {
 
   /**
     * Specifies the IDs to retrieve.
