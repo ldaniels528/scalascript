@@ -11,8 +11,7 @@ import scala.scalajs.js
 @js.native
 trait LinkedIn extends js.Object {
   val API: LinkedInAPIService = js.native
-  val AUTH: js.Dynamic = js.native
-  // TODO is this a valid service?
+  val AUTH: js.Dynamic = js.native // TODO is AUTH a valid service?
   val Event: LinkedInEventService = js.native
   val ENV: LinkedInEnvironmentService = js.native
   val UI: LinkedInUIService = js.native
@@ -56,6 +55,12 @@ object LinkedIn {
 trait LinkedInAPIService extends js.Object {
 
   /**
+    * Connections service
+    * @see [[https://developer-programs.linkedin.com/documents/inapiconnections]]
+    */
+  def Connections(): LinkedInConnectionsService = js.native
+
+  /**
     * People Search service
     * @see [[https://developer-programs.linkedin.com/documents/inapipeoplesearch]]
     */
@@ -70,14 +75,35 @@ trait LinkedInAPIService extends js.Object {
   /**
     * Raw REST service
     * @see [[https://developer-programs.linkedin.com/documents/inapiraw]]
+    * @see [[https://developer.linkedin.com/docs/company-pages]]
     */
   def Raw[T <: js.Any](): LinkedInAPIService_URL[T] = js.native
 
   /**
     * Raw REST service
-    * @see [[https://developer-programs.linkedin.com/documents/inapiraw]]
     */
   def Raw[T <: js.Any](path: String): LinkedInAPIService_OptionsOrPromise[T] = js.native
+
+}
+
+/**
+  * LinkedIn API Service: Connections
+  * @author lawrence.daniels@gmail.com
+  * @see [[https://developer-programs.linkedin.com/documents/inapiconnections]]
+  */
+@js.native
+trait LinkedInConnectionsService extends LinkedInPromise[LinkedInProfileResponse] {
+
+  /**
+    * Specifies the IDs to retrieve.
+    * @param identifiers the given identifiers
+    * @return a reference to [[LinkedInConnectionsService self]]
+    */
+  def ids(identifiers: js.Array[String]): this.type = js.native
+
+  def fields(names: String*): this.type = js.native
+
+  def params(values: js.Dictionary[Any]): this.type = js.native
 
 }
 
@@ -357,11 +383,21 @@ trait LinkedInProfile_ApiStandardProfileRequest extends js.Object {
   * @author lawrence.daniels@gmail.com
   */
 @js.native
-trait LinkedInProfile_ApiStandardProfileRequest_Headers extends LinkedInResponse[js.Dictionary[Any]]
+trait LinkedInProfile_ApiStandardProfileRequest_Headers extends LinkedInResponse[LinkedInNameValuePair]
 
 ///////////////////////////////////////////////////////////////////////////
 //      Reference Types
 ///////////////////////////////////////////////////////////////////////////
+
+/**
+  * LinkedIn Name-Value Pair
+  * @author lawrence.daniels@gmail.com
+  */
+@js.native
+trait LinkedInNameValuePair extends js.Object {
+  var name: js.UndefOr[String]
+  var value: js.UndefOr[String]
+}
 
 /**
   * LinkedIn Paginated Response Wrapper
