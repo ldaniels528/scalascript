@@ -22,12 +22,14 @@ class Facebook($q: Q) extends Service {
 
   // define the API properties
   var appID: js.UndefOr[String] = js.undefined
-  var version = "v2.5"
   var auth: js.UndefOr[FacebookAuthResponse] = js.undefined
+  var version = "v2.5"
 
   ///////////////////////////////////////////////////////////////////////////
   //      Authentication and User Profile-related Functions
   ///////////////////////////////////////////////////////////////////////////
+
+  def accessToken: js.UndefOr[String] = auth.map(_.accessToken)
 
   def facebookID: js.UndefOr[String] = auth.map(_.userID)
 
@@ -194,7 +196,7 @@ class Facebook($q: Q) extends Service {
     * @return the URL (e.g. "/v2.5/me/photos?access_token=....")
     */
   private def fbURL(path: String = "", args: js.UndefOr[String] = js.undefined, fbUserID: String = "me") = {
-    s"/$version/$fbUserID$path?access_token=${auth.map(_.accessToken)}" + (args map (myArgs => s"&$myArgs") getOrElse "")
+    s"/$version/$fbUserID$path?access_token=$accessToken" + (args map (myArgs => s"&$myArgs") getOrElse "")
   }
 
   private def handleResponse[A <: FacebookResponse](deferred: QDefer[A], response: js.UndefOr[A]) = {
