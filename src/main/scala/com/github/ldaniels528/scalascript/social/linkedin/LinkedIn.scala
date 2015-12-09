@@ -5,6 +5,7 @@ import scala.scalajs.js
 /**
   * LinkedIn JavaScript API Scala.js Binding
   * @author lawrence.daniels@gmail.com
+  * @see [[https://developer-programs.linkedin.com/documents/making-api-requests-using-inapi]]
   * @see [[https://developer-programs.linkedin.com/documents/inauth-inevent-and-inui]]
   * @see [[https://developer.linkedin.com/docs/signin-with-linkedin]]
   */
@@ -28,7 +29,7 @@ trait LinkedIn extends js.Object {
     * @param domNode the given DOM node
     * @return
     */
-  def parse(domNode: String) = js.native // TODO find out the return type
+  def parse(domNode: String): Any = js.native // TODO find out the return type
 
 }
 
@@ -57,8 +58,25 @@ trait LinkedInAPIService extends js.Object {
   /**
     * Connections service
     * @see [[https://developer-programs.linkedin.com/documents/inapiconnections]]
+    * @see [[http://stackoverflow.com/questions/29109880/linkedin-js-api-get-my-connections-issue]]
     */
   def Connections(): LinkedInConnectionsService = js.native
+
+  /**
+    * Connections service
+    */
+  def Connections(ids: js.Array[String]): LinkedInConnectionsService = js.native
+
+  /**
+    * Member Updates service
+    * @see [[https://developer-programs.linkedin.com/documents/inapimemberupdates-and-inapinetworkupdates]]
+    */
+  def MemberUpdates(): LinkedInMemberUpdatesService = js.native
+
+  /**
+    * Member Updates service
+    */
+  def MemberUpdates(id: String): LinkedInMemberUpdatesService = js.native
 
   /**
     * People Search service
@@ -71,6 +89,11 @@ trait LinkedInAPIService extends js.Object {
     * @see [[https://developer-programs.linkedin.com/documents/inapiprofile]]
     */
   def Profile(): LinkedInAPIProfileService = js.native
+
+  /**
+    * Profile Information service
+    */
+  def Profile(ids: js.Array[String]): LinkedInAPIProfileService = js.native
 
   /**
     * Raw REST service
@@ -179,8 +202,34 @@ trait LinkedInEventService extends js.Object {
 
 }
 
+
 /**
-  * LinkedIn People Search
+  * LinkedIn API: Member Updates
+  * @author lawrence.daniels@gmail.com
+  */
+@js.native
+trait LinkedInMemberUpdatesService extends LinkedInPromise[LinkedInMemberUpdateResponse] {
+
+  /**
+    * Specifies the IDs to retrieve.
+    * @param identifiers the given identifiers
+    * @return a reference to [[LinkedInConnectionsService self]]
+    */
+  def ids(identifiers: js.Array[String]): this.type = js.native
+
+  /**
+    * Specifies the fields to retrieve. If not specified, the default fields will be
+    * used: "id", "firstName", "lastName", "headline", "pictureUrl".  A full list of
+    * available fields can be found in Profile Fields.
+    * @param names the given field names
+    * @return a reference to [[LinkedInAPIProfileService self]]
+    */
+  def fields(names: js.Array[String]): this.type = js.native
+
+}
+
+/**
+  * LinkedIn API: People Search
   * @author lawrence.daniels@gmail.com
   */
 @js.native
@@ -226,7 +275,6 @@ trait LinkedInUIService extends js.Object {
 
   /**
     * Opens an authorization window.
-    * @return
     */
   def Authorize(): LinkedInUIService_Authorize = js.native
 
@@ -314,6 +362,42 @@ trait LinkedInUserService extends js.Object {
 trait LinkedInConfig extends js.Object {
   var api_key: js.UndefOr[String]
   var onLoad: js.Function
+}
+
+/**
+  * LinkedIn Member Update Response
+  * @author lawrence.daniels@gmail.com
+  */
+@js.native
+trait LinkedInMemberUpdateResponse extends js.Object {
+  var isCommentable: js.UndefOr[Boolean]
+  var isLikable: js.UndefOr[Boolean]
+  var isLiked: js.UndefOr[Boolean]
+  var numLikes: js.UndefOr[Int]
+  var timestamp: js.UndefOr[js.Date]
+  var updateContent: js.UndefOr[LinkedInMemberUpdate_UpdateContent]
+  var updatedFields: js.UndefOr[LinkedInMemberUpdate_UpdatedFields]
+  var updateKey: js.UndefOr[String]
+  var updateType: js.UndefOr[String]
+}
+
+/**
+  * LinkedIn Member Update - Update Content
+  * @author lawrence.daniels@gmail.com
+  */
+@js.native
+trait LinkedInMemberUpdate_UpdateContent extends js.Object {
+  var person: js.UndefOr[LinkedInProfile]
+}
+
+/**
+  * LinkedIn Member Update - Updated Fields
+  * @author lawrence.daniels@gmail.com
+  */
+@js.native
+trait LinkedInMemberUpdate_UpdatedFields extends js.Object {
+  var _count: js.UndefOr[Int]
+  var values: js.Array[js.Dictionary[Any]]
 }
 
 /**
@@ -406,8 +490,8 @@ trait LinkedInNameValuePair extends js.Object {
   */
 @js.native
 trait LinkedInPaginatedResponse[T <: js.Any] extends LinkedInResponse[T] {
-  var _count: Int
-  var _start: Int
+  var _count: js.UndefOr[Int]
+  var _start: js.UndefOr[Int]
 }
 
 /**
@@ -416,8 +500,15 @@ trait LinkedInPaginatedResponse[T <: js.Any] extends LinkedInResponse[T] {
   */
 @js.native
 trait LinkedInResponse[T <: js.Any] extends js.Object {
-  var _total: Int
+  var _total: js.UndefOr[Int]
   var values: js.Array[T]
+
+  // in the case of an error ....?
+  var errorCode: js.UndefOr[Int]
+  var message: js.UndefOr[String]
+  var requestId: js.UndefOr[String]
+  var status: js.UndefOr[Int]
+  var timestamp: js.UndefOr[js.Date]
 }
 
 /**
