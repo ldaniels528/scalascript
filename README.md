@@ -1,6 +1,6 @@
 ScalaScript
 =============
-A Type-safe Scala.js Binding for AngularJS 
+Type-safe Scala.js Bindings for AngularJS 
 
 ## Introduction
 

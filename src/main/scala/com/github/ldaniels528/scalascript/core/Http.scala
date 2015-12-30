@@ -62,7 +62,7 @@ trait Http extends js.Object {
    * @param config Optional configuration object
    * @return a [[HttpPromise promise]] of an response
    */
-  def post[T <: js.Any](url: String, data: js.Any = js.native, config: HttpConfig = js.native, headers: js.Dictionary[js.Any] = js.native): HttpPromise[T] = js.native
+  def post[T <: js.Any](url: String, data: js.Any = js.native, config: HttpConfig = js.native, headers: js.Dictionary[js.Any] = js.native, responseType: String = js.native): HttpPromise[T] = js.native
 
   /**
    * Shortcut method to perform a PUT request.
@@ -71,7 +71,7 @@ trait Http extends js.Object {
    * @param data Request content
    * @return a [[HttpPromise promise]] of an response
    */
-  def put[T <: js.Any](url: String, data: js.Any = js.native, config: HttpConfig = js.native, headers: js.Dictionary[js.Any] = js.native): HttpPromise[T] = js.native
+  def put[T <: js.Any](url: String, data: js.Any = js.native, config: HttpConfig = js.native, headers: js.Dictionary[js.Any] = js.native, responseType: String = js.native): HttpPromise[T] = js.native
 
   /**
    * Shortcut method to perform a PATCH request.
@@ -80,7 +80,7 @@ trait Http extends js.Object {
    * @param config Optional configuration object
    * @return a [[HttpPromise promise]] of an response
    */
-  def patch[T <: js.Any](url: String, data: js.Any = js.native, config: HttpConfig = js.native, headers: js.Dictionary[js.Any] = js.native): HttpPromise[T] = js.native
+  def patch[T <: js.Any](url: String, data: js.Any = js.native, config: HttpConfig = js.native, headers: js.Dictionary[js.Any] = js.native, responseType: String = js.native): HttpPromise[T] = js.native
 
 }
 

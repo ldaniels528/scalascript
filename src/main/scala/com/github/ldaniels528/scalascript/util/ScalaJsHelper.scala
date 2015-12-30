@@ -201,13 +201,19 @@ object ScalaJsHelper {
 
   /**
     * Option Extensions
-    * @param optA the given [[Option option]]
+    * @param valueA the given [[Option option]]
     */
-  implicit class OptionExtensions[T](val optA: Option[T]) extends AnyVal {
+  implicit class OptionExtensions[T](val valueA: Option[T]) extends AnyVal {
 
-    @inline def ??(optB: => Option[T]): Option[T] = if (optA.isDefined) optA else optB
+    @inline def ?==(valueB: T): Boolean = valueA.contains(valueB)
 
-    @inline def orDie(message: String): Option[T] = if(optA.isDefined) optA else throw new IllegalArgumentException(message)
+    @inline def ?==(valueB: js.UndefOr[T]): Boolean = valueA.exists(v => valueB.exists(_ == v))
+
+    @inline def ?==(valueB: Option[T]): Boolean = valueA.exists(valueB.contains)
+
+    @inline def ??(optB: => Option[T]): Option[T] = if (valueA.isDefined) valueA else optB
+
+    @inline def orDie(message: String): Option[T] = if (valueA.isDefined) valueA else throw new IllegalArgumentException(message)
 
   }
 
@@ -235,15 +241,21 @@ object ScalaJsHelper {
 
   /**
     * UndefOr Extensions
-    * @param optA the given [[js.UndefOr undefined or otherwise value]]
+    * @param valueA the given [[js.UndefOr undefined or otherwise value]]
     */
-  implicit class UndefOrExtensions[T](val optA: js.UndefOr[T]) extends AnyVal {
+  implicit class UndefOrExtensions[T](val valueA: js.UndefOr[T]) extends AnyVal {
 
-    @inline def ??(optB: => js.UndefOr[T]): js.UndefOr[T] = if (optA.isDefined) optA else optB
+    @inline def ?==(valueB: T): Boolean = valueA.exists(_ == valueB)
 
-    @inline def contains(value: T): Boolean = optA.exists(_ == value)
+    @inline def ?==(valueB: js.UndefOr[T]): Boolean = valueA.exists(v => valueB.exists(_ == v))
 
-    @inline def orDie(message: String): js.UndefOr[T] = if(optA.isDefined) optA else throw new IllegalArgumentException(message)
+    @inline def ?==(valueB: Option[T]): Boolean = valueA.exists(valueB.contains)
+
+    @inline def ??(optB: => js.UndefOr[T]): js.UndefOr[T] = if (valueA.isDefined) valueA else optB
+
+    @inline def contains(value: T): Boolean = valueA.exists(_ == value)
+
+    @inline def orDie(message: String): js.UndefOr[T] = if (valueA.isDefined) valueA else throw new IllegalArgumentException(message)
 
   }
 

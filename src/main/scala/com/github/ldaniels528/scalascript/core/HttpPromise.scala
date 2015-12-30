@@ -38,7 +38,7 @@ trait HttpPromise[T <: js.Any] extends AngularPromise {
 
   def success(callback: js.Function5[T, Int, js.Any, js.Any, js.Any, Unit]): HttpPromise[T] = js.native
 
-  def `then`: js.Function3[js.Function, js.Function, js.Function, HttpPromise[T]] = js.native
+  def `then`(success: js.Function1[js.Any, Unit], failure: js.Function1[js.Any, Unit] = js.native, callback: js.Function = js.native): HttpPromise[T] = js.native
 
 }
 
