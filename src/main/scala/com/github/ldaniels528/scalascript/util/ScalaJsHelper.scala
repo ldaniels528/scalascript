@@ -245,9 +245,7 @@ object ScalaJsHelper {
     */
   implicit class UndefOrExtensions[T](val valueA: js.UndefOr[T]) extends AnyVal {
 
-    @inline def ?==(valueB: T): Boolean = valueA.exists(_ == valueB)
-
-    @inline def ?==(valueB: js.UndefOr[T]): Boolean = valueA.exists(v => valueB.exists(_ == v))
+    @inline def ?==(valueB: js.UndefOr[T]): Boolean = valueA.exists(valueB.contains)
 
     @inline def ?==(valueB: Option[T]): Boolean = valueA.exists(valueB.contains)
 
