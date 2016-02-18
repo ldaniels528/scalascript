@@ -36,7 +36,7 @@ trait FileUploadConfig extends js.Object {
  * @author lawrence.daniels@gmail.com
  */
 @js.native
-object FileUploadConfig {
+object FileUploadConfig extends js.Object {
 
   def apply[T](url: String, file: File, data: Option[T] = None) = {
     require(url != null || url.isEmpty, "Required property 'url' is missing")
