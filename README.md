@@ -8,6 +8,10 @@ The goal of ScalaScript is to be more than just a type-safe Scala.js binding for
 great lengths to make all the things you love about writing Scala on the back-end, to the front-end. To that end, various
 refinements have been added to make the transition more seamless.
 
+*This project is no longer in active development*
+
+Please use [MEANS.js](https://github.com/ldaniels528/MEANS.js) instead.
+
 ## Defining a Module
 
 ```scala
